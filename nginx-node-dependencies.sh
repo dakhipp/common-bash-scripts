@@ -6,18 +6,8 @@
 NPM_GLOBAL=pm2
 
 yum -y update
-yum install -y nginx
-yum install -y git
-yum install -y gcc gcc-c++ make openssl-devel
-cd /tmp
-curl -O https://nodejs.org/dist/v4.6.0/node-v4.6.0.tar.gz
-tar -xvf node-v4.6.0.tar.gz && rm node-v4.6.0.tar.gz
-cd node-v4.6.0/
-./configure
-make
-make install
-ln -s /usr/local/bin/node /usr/bin/node
-ln -s /usr/local/lib/node /usr/lib/node
-ln -s /usr/local/bin/npm /usr/bin/npm  
+curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+yum install -y nodejs nginx git
+yum install -y gcc-c++ make
 npm install -g n $NPM_GLOBAL
 n 5.12.0

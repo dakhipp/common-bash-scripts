@@ -10,6 +10,7 @@
 # define some constants
 IP=52.33.56.97
 SITE_NAME=node.dakhipp.com
+STATIC_PATH=/var/www/html/$SITE_NAME/public
 
 # create backup of nginx file
 if !  [ -e "/etc/nginx/nginx.conf.bak" ]; then
@@ -72,7 +73,7 @@ echo "server {
   listen [::]:80;
   listen 443 ssl;
 
-  server_name www.$site.com;
+  server_name www.$SITE_NAME.com;
 
   include /etc/nginx/sites-enabled/_security-include;
          
@@ -86,7 +87,7 @@ echo "server {
     listen [::]:80;
     listen 443 ssl;
 
-    server_name SITE;
+    server_name $SITE_NAME;
 
     access_log /logs/$site-access-nginx.log;
     error_log /logs/$site-error-nginx.log;
@@ -100,7 +101,7 @@ echo "server {
 
     # handle static assets and enable compression and caching 
     location ~ \.(mp3|mp4|webm|png|jpg|svg|jpeg|ttf|woff|woff2|eot|js|css|min.js|min.css|txt|xml) {
-        root /var/www/html/mobilesoft-hapi/public/dist;
+        root $STATIC_PATH;
         gzip on; 
         gzip_disable msie6;
         gzip_vary on; 
@@ -134,8 +135,8 @@ echo "server {
 
 # security include file. sets up ssl, turns off servier identification, sets some headers, and blocks common attacks
 echo "ssl on;
-ssl_certificate /etc/ssl/private/$CRT_LOCATION;
-ssl_certificate_key /etc/ssl/private/$KEY_LOCATION;
+ssl_certificate /etc/ssl/private/$SITE_NAME.crt;
+ssl_certificate_key /etc/ssl/private/$SITE_NAME.key;
 
 server_tokens off;
 

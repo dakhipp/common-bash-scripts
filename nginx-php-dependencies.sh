@@ -3,8 +3,7 @@
 # Installs dependencies for php with nginx.
 
 sudo yum update -y
-sudo yum install epel-release -y
-sudo yum install git nginx php-fpm php -y
+sudo yum install epel-release git nginx php-fpm php -y
 mkdir temp
 cd temp
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
