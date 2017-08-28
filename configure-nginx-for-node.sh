@@ -89,8 +89,8 @@ echo "server {
 
     server_name $SITE_NAME;
 
-    access_log /logs/$site-access-nginx.log;
-    error_log /logs/$site-error-nginx.log;
+    access_log /logs/$SITE_NAME-access-nginx.log;
+    error_log /logs/$SITE_NAME-error-nginx.log;
 
     include /etc/nginx/sites-enabled/_security-include;
 
